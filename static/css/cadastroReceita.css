@@ -328,3 +328,16 @@ footer {
       transform: rotateY(3600deg);
     }
   }
+
+  .mensagem-acerto-erro {
+    padding-bottom: 50px;
+    color: green;
+    font-family: "Avenir-Medium";
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+.secao-mensagem {
+    background-color: var(--background);
+}

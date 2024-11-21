@@ -10,7 +10,16 @@
 <body>
     <section class="formulario">
         <div class="form-sec">
-            <form class="form">
+            <section class="mensagem-sec">
+             {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+            </section>
+            <form class="form" action="{{ url_for('adiciona_usuario') }}" method="POST">
                 <span class="input-span">
                 <label for="nome" class="label">Nome</label>
                 <input type="text" name="nome" id="nome"
@@ -24,8 +33,8 @@
                 <input type="password" name="senha" id="senha"
               /></span>
               <input class="submit" type="submit" value="Cadastrar" />
-              <span class="span">Já tem uma conta? <a href="../templates/login.html">Logue agora</a></span>
-              <a class="voltar" href="../templates/index.html">VOLTAR</a>
+              <span class="span">Já tem uma conta? <a href="{{ url_for('abrir_login') }}">Logue agora</a></span>
+              <a class="voltar" href="{{ url_for('index') }}">VOLTAR</a>
             </form>
         </div>
     </section>

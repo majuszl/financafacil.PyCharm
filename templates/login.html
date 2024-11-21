@@ -10,7 +10,18 @@
 <body>
     <section class="formulario">
         <div class="form-sec">
-            <form class="form">
+            <section class="mensagem-importante-sec">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flashes">
+                    {% for message in messages %}
+                        <div class="flash-message">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+            </section>
+            <form class="form" action="{{ url_for('login') }}" method="POST">
               <span class="input-span">
                 <label for="email" class="label">E-mail</label>
                 <input type="email" name="email" id="email"
@@ -20,8 +31,9 @@
                 <input type="password" name="senha" id="senha"
               /></span>
               <input class="submit" type="submit" value="Entrar" />
-              <span class="span">Não tem uma conta? <a href="../templates/cadastro.html">Cadastre-se</a></span>
-              <a class="voltar" href="../templates/index.html">VOLTAR</a>
+              <span class="span">Não tem uma conta? <a href="{{ url_for('cria_usuario') }}">Cadastre-se</a></span>
+              <a class="voltar" href="{{ url_for('index') }}">VOLTAR</a>
+
             </form>
         </div>
     </section>

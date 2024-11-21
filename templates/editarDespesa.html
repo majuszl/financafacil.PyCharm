@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Cadastro de Despesas</title>
+    <title>Página de Edição de Despesas</title>
     <link rel="stylesheet" href="../static/css/cadastroDespesa.css">
 
     <!-- FONTE: AVENIR MEDIUM -->
@@ -30,7 +30,7 @@
 
         <nav>
             <div>
-                <a class="home" href="{{ url_for('inicial') }}">
+                <a class="home" href="{{ url_for('index') }}">
                     HOME>
                 </a>
             </div>
@@ -52,7 +52,7 @@
         </section>
 
         <section class="botao-cab">
-            <a href="{{ url_for('login') }}">
+            <a  href="{{ url_for('login') }}">
                 <button class="botao-contato">
                     <span class="transicao"></span>
                     <span class="gradiente"></span>
@@ -64,57 +64,32 @@
 
     <!-- CONTEÚDO -->
     <main id="main-sec" style="opacity: 0; transition: opacity 1s;">
-        <section class="texto">
-            <h1>Cadastro de Despesas</h1>
-            <p>
-                Nessa seção você pode gerenciar suas finanças de maneira simples e eficiente. Esta ferramenta foi criada para ajudá-lo a registrar e acompanhar sua finanças e despesas diárias, proporcionando uma visão clara sobre seus hábitos de consumo.
-            </br></br>
-                <span class="sub"><b>Por que devo cadastrar minhas despesas?</b></span>
-            </br>    
-                Manter um registro das suas despesas é essencial para uma boa gestão financeira. Ao cadastrar cada gasto, você poderá identificar padrões de consumo e verificar para onde seu dinheiro está indo fazendo ajustes quando necessário, poderá planejar o seu orçamento de modo mais realista e sustentável e atingir os seus objetivos financeiros, seja para economizar, investir ou quitar dívidas.
-            </br></br>
-                <span class="sub"><b>Como funciona?</b></span>
-            </br>
-                Para registrar suas despesas é necessário seguir os seguintes passos:
-            </p>
-            <ul>
-                <li>
-                    <span class="sub"><b>1. Adicione uma Despesa:</b></span> <span class="texto-topico">Preencha o formulário com informações como valor, data e descrição.</span>
-                </li>
-                <li>
-                    <span class="sub"><b>2. Visualize seu Histórico:</b></span> <span class="texto-topico">Acesse uma lista completa das suas despesas cadastradas, facilitando a consulta e análise.</span>
-                </li>
-                <li>
-                    <span class="sub"><b>3. Analise Gráficos e Relatórios:</b></span> <span class="texto-topico">Acompanhe suas despesas de forma visual, ajudando você a tomar decisões informadas.</span>
-                </li>
-            </ul>
-            <p>
-                Pronto para começar? Registre suas despesas abaixo agora mesmo!
-            </p>
+        <section class="secao-espaco"
+            </br></br></br></br>
         </section>
-
         <section class="formulario">
-            <form class="form" action="{{ url_for('criarDespesa') }}" method="post">
+            </br></br></br>
+            <form class="form"  action="{{ url_for('editarDespesa', id=despesa[0]) }}" method="post">
                 <p class="title">Registrar </p>
                 <p class="message">Registre suas despesas! </p>
                     <div class="flex">
                     <label for="nome">
-                        <input class="input" type="text" placeholder="" required="" id="nome" name="nome">
+                        <input class="input" type="text" placeholder="" required="" id="nome" name="nome" value="{{ despesa[1] }}">
                         <span>Nome</span>
                     </label>
-                </div>  
-                        
+                </div>
+
                 <label for="valor">
-                    <input class="input" type="number" placeholder="" required="" id="valor" name="valor">
+                    <input class="input" type="number" placeholder="" required="" id="valor" name="valor" value="{{ despesa[2] }}">
                     <span>Valor da despesa em R$</span>
-                </label> 
-                    
+                </label>
+
                 <label for="data_despesa">
-                    <input class="input" type="date" placeholder="" required="" id="data_despesa" name="data_despesa">
+                    <input class="input" type="date" placeholder="" required="" id="data_despesa" name="data_despesa" value="{{ despesa[3] }}">
                     <span>Data: DD/MM/YYYY</span>
                 </label>
                 <label for="descricao">
-                    <input class="input" type="text" placeholder="" required="" id="descricao" name="descricao">
+                    <input class="input" type="text" placeholder="" required="" id="descricao" name="descricao" value="{{ despesa[4] }}">
                     <span>Descrição</span>
                 </label>
                 <button class="submit">Salvar Despesa</button>

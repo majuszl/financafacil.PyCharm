@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro Receita</title>
+    <title>Edição Receita</title>
     <link rel="stylesheet" href="../static/css/cadastroReceita.css">
     <link href="https://db.onlinewebfonts.com/c/2090551770be22b09600a40b0b4673b7?family=Avenir-Medium" rel="stylesheet">
 </head>
@@ -27,7 +27,7 @@
                 </a>
             </div>
             <div>
-                <a class="receitas" href="{{ url_for('cadastroDespesa') }}">
+                <a class="receitas"  href="{{ url_for('cadastroDespesa') }}">
                     DESPESAS>
                 </a>
             </div>
@@ -59,29 +59,29 @@
     <section>
         <h1>Cadastro de Receita</h1>
         <p class="p1">Preencha os campos abaixo!</p>
-        <form action="{{ url_for('criarReceita') }}" method="post">
+        <form action="{{ url_for('editarReceita', id=receita[0]) }}" method="post">
             <div>
                 </br>
                 <label for="nome">Nome *</label>
-                <input required type="text" placeholder="Nome" id="nome" name="nome"/>
+                <input required type="text" placeholder="Nome" id="nome" name="nome" value="{{ receita[1] }}"/>
             </div>
 
             <div>
                 <label for="valor">Valor *</label>
-                <input required type="number" placeholder="number" id="valor" name="valor"/>
+                <input required type="number" placeholder="number" id="valor" name="valor" value="{{ receita[2] }}"/>
             </div>
 
             <div>
                 <label for="data_receita">Data *</label>
-                <input required type="date" placeholder="Data" id="data_receita" name="data_receita"/>
+                <input required type="date" placeholder="Data" id="data_receita" name="data_receita" value="{{ receita[3] }}"/>
             </div>
 
             <div class="mensagem">
                 <label for="descricao">Descrição</label>
-                <textarea required rows="10" required cols="70" id="descricao" name="descricao"></textarea>
+                <textarea required rows="10" required cols="70" id="descricao" name="descricao" value="{{ receita[4] }}"></textarea>
             </div>
             <button id="click" class="bt5" type="submit">Enviar →</button></br>
-        </form> 
+        </form>
             <h5 id="escrito" ></h5></br></br>
     </section>
           <section class="secao-mensagem">
@@ -111,8 +111,8 @@
     </script>
     <!-- Fim estrutura site -->
 
-    
-    <!-- INÍCIO DO RODAPÉ --> 
+
+    <!-- INÍCIO DO RODAPÉ -->
     <footer id="contato">
         <div class="loader"></div>
         <h2>Fale conosco!</h2>

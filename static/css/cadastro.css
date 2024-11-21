@@ -124,3 +124,9 @@ body {
 .voltar:hover {
     color: var(--titulo);
 }
+
+.mensagem-sec {
+    color: grey;
+    font-family: "Avenir-Medium";
+    text-align: center;
+}
