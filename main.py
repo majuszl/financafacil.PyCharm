@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'grupo2'
 
 host = 'localhost'
-database = r'C:\Users\Aluno\Downloads\siteFinanceiroBanco\BANCODADOS.FDB'
+database = r'C:\Users\Aluno\Downloads\BancoFinacaFacil\BANCODADOS.FDB'
 user = 'SYSDBA'
 password = 'sysdba'
 
@@ -53,15 +53,42 @@ def abrir_login():
 
 @app.route('/abrir_cad_despesa')
 def abrir_cad_despesa():
+    if 'id_usuario' not in session:
+        flash('Você precisa estar logado para acessar a página.')
+        return redirect(url_for('login'))
+
     return render_template('cadastroDespesa.html')
 
 
 @app.route('/abrir_cad_receita')
 def abrir_cad_receita():
+    if 'id_usuario' not in session:
+        flash('Você precisa estar logado para acessar a página')
+        return redirect(url_for('login'))
     return render_template('cadastroReceita.html')
+
+@app.route('/excluirDespesa')
+def excluirDespesa():
+    if 'id_usuario' not in session:
+        flash('Você precisa estar logado para acessar a página')
+        return redirect(url_for('login'))
+    return render_template('excluirDespesa.html')
+
+@app.route('/excluirReceita')
+def excluirReceita():
+    if 'id_usuario' not in session:
+        flash('Você precisa estar logado para acessar a página')
+        return redirect(url_for('login'))
+    return render_template('excluirReceita.html')
 
 @app.route('/listaDespesa')
 def listaDespesa():
+
+    if 'id_usuario' not in session:
+        flash('Você precisa estar logado para acessar a página')
+        return redirect(url_for('login'))
+
+
     id_usuario = session['id_usuario']
     cursor = con.cursor()
     cursor.execute("SELECT d.ID_DESPESA , d.NOME, d.VALOR, d.DATA_DESPESA, d.DESCRICAO FROM DESPESA d WHERE d.ID_USUARIO  = ?", (id_usuario,))
@@ -70,6 +97,10 @@ def listaDespesa():
 
 @app.route('/listaReceita')
 def listaReceita():
+    if 'id_usuario' not in session:
+        flash('Você precisa estar logado para acessar a página')
+        return redirect(url_for('login'))
+
     id_usuario = session['id_usuario']
     cursor = con.cursor()
     cursor.execute("SELECT r.ID_RECEITA ,r.NOME, r.VALOR, r.DATA_RECEITA, r.DESCRICAO FROM RECEITA r WHERE r.ID_USUARIO  = ?", (id_usuario,))
@@ -79,6 +110,11 @@ def listaReceita():
 
 @app.route('/inicial')
 def inicial():
+
+    if 'id_usuario' not in session:
+        flash('Você precisa estar logado para acessar a página')
+        return redirect(url_for('login'))
+
     cursor = con.cursor()
 
     id_usuario = session['id_usuario']
@@ -144,6 +180,11 @@ def inicial():
 
 @app.route('/cadastroDespesa')
 def cadastroDespesa():
+
+    if 'id_usuario' not in session:
+        flash('Você precisa estar logado para acessar a página')
+        return redirect(url_for('login'))
+
     cursor = con.cursor()
     cursor.execute("SELECT ID_DESPESA, NOME, VALOR, DATA_DESPESA, DESCRICAO FROM DESPESA")
     despesa = cursor.fetchall()
@@ -153,6 +194,11 @@ def cadastroDespesa():
 
 @app.route('/cadastroReceita')
 def cadastroReceita():
+
+    if 'id_usuario' not in session:
+        flash('Você precisa estar logado para acessar a página')
+        return redirect(url_for('login'))
+
     cursor = con.cursor()
     cursor.execute("SELECT ID_RECEITA, NOME, VALOR, DATA_RECEITA, DESCRICAO FROM RECEITA")
     receita = cursor.fetchall()
@@ -161,6 +207,11 @@ def cadastroReceita():
 
 @app.route('/criarDespesa', methods=['POST'])
 def criarDespesa():
+
+    if 'id_usuario' not in session:
+        flash('Você precisa estar logado para acessar a página')
+        return redirect(url_for('login'))
+
     nome = request.form['nome']
     valor = request.form['valor']
     data_despesa = request.form['data_despesa']
@@ -186,6 +237,11 @@ def criarDespesa():
 
 @app.route('/criarReceita', methods=['POST'])
 def criarReceita():
+
+    if 'id_usuario' not in session:
+        flash('Você precisa estar logado para acessar a página')
+        return redirect(url_for('login'))
+
     nome = request.form['nome']
     valor = request.form['valor']
     data_receita = request.form['data_receita']
@@ -211,6 +267,11 @@ def criarReceita():
 
 @app.route('/editarDespesa/<int:id>', methods=['GET', 'POST'])
 def editarDespesa(id):
+
+    if 'id_usuario' not in session:
+        flash('Você precisa estar logado para acessar a página')
+        return redirect(url_for('login'))
+
     cursor = con.cursor()
     cursor.execute("SELECT id_despesa, nome, valor, data_despesa, descricao FROM despesa WHERE id_despesa = ?", (id,))
     despesa = cursor.fetchone()
@@ -234,6 +295,11 @@ def editarDespesa(id):
 
 @app.route('/editarReceita/<int:id>', methods=['GET', 'POST'])
 def editarReceita(id):
+
+    if 'id_usuario' not in session:
+        flash('Você precisa estar logado para acessar a página')
+        return redirect(url_for('login'))
+
     cursor = con.cursor()
     cursor.execute("SELECT id_receita, nome, valor, data_receita, descricao FROM receita WHERE id_receita = ?", (id,))
     receita = cursor.fetchone()
@@ -257,6 +323,11 @@ def editarReceita(id):
 
 @app.route('/deletarDespesa/<int:id>', methods=['POST'])
 def deletarDespesa(id):
+
+    if 'id_usuario' not in session:
+        flash('Você precisa estar logado para acessar a página')
+        return redirect(url_for('login'))
+
     cursor = con.cursor()
     try:
         cursor.execute('DELETE FROM despesa WHERE id_despesa = ?', (id,))
@@ -271,6 +342,11 @@ def deletarDespesa(id):
 
 @app.route('/deletarReceita/<int:id>', methods=['POST'])
 def deletarReceita(id):
+
+    if 'id_usuario' not in session:
+        flash('Você precisa estar logado para acessar a página')
+        return redirect(url_for('login'))
+
     cursor = con.cursor()
     try:
         cursor.execute('DELETE FROM receita WHERE id_receita = ?', (id,))
@@ -330,11 +406,9 @@ def login():
             session['id_usuario'] = usuario[0]
             session['nome'] = usuario[1]
             return redirect(url_for('inicial'))
-            id_usuario = session['id_usuario']
-            print(id_usuario)
         else:
             flash('Email ou senha incorretos!')
-            return render_template('login')
+            return redirect(url_for('login'))
 
     return render_template('login.html')
 

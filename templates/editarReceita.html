@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edição Receita</title>
+    <title>Editar Receita</title>
     <link rel="stylesheet" href="../static/css/cadastroReceita.css">
     <link href="https://db.onlinewebfonts.com/c/2090551770be22b09600a40b0b4673b7?family=Avenir-Medium" rel="stylesheet">
 </head>
@@ -27,7 +27,7 @@
                 </a>
             </div>
             <div>
-                <a class="receitas"  href="{{ url_for('cadastroDespesa') }}">
+                <a class="receitas" href="{{ url_for('cadastroDespesa') }}">
                     DESPESAS>
                 </a>
             </div>
@@ -56,35 +56,38 @@
     <!-- Fim cabeçalho -->
 
     <!-- Estrutura site -->
-    <section>
-        <h1>Cadastro de Receita</h1>
-        <p class="p1">Preencha os campos abaixo!</p>
-        <form action="{{ url_for('editarReceita', id=receita[0]) }}" method="post">
-            <div>
-                </br>
-                <label for="nome">Nome *</label>
-                <input required type="text" placeholder="Nome" id="nome" name="nome" value="{{ receita[1] }}"/>
-            </div>
+    <main id="main-sec" style="opacity: 0; transition: opacity 1s;">
+       <section class="secao-espaco"
+            </br></br></br></br>
+        </section>
+    <section class="formulario">
+            <form class="form" action="{{ url_for('editarReceita', id=receita[0]) }}" method="post">
+                <p class="title">Registrar </p>
+                <p class="message">Registre suas receitas! </p>
+                    <div class="flex">
+                    <label for="nome">
+                        <input class="input" type="text" placeholder="" required="" id="nome" name="nome" value="{{ receita[1] }}">
+                        <span>Nome</span>
+                    </label>
+                </div>
 
-            <div>
-                <label for="valor">Valor *</label>
-                <input required type="number" placeholder="number" id="valor" name="valor" value="{{ receita[2] }}"/>
-            </div>
+                <label for="valor">
+                    <input class="input" type="number" placeholder="" required="" id="valor" name="valor" value="{{ receita[2] }}">
+                    <span>Valor da receita em R$</span>
+                </label>
 
-            <div>
-                <label for="data_receita">Data *</label>
-                <input required type="date" placeholder="Data" id="data_receita" name="data_receita" value="{{ receita[3] }}"/>
-            </div>
-
-            <div class="mensagem">
-                <label for="descricao">Descrição</label>
-                <textarea required rows="10" required cols="70" id="descricao" name="descricao" value="{{ receita[4] }}"></textarea>
-            </div>
-            <button id="click" class="bt5" type="submit">Enviar →</button></br>
-        </form>
-            <h5 id="escrito" ></h5></br></br>
-    </section>
-          <section class="secao-mensagem">
+                <label for="data_receita">
+                    <input class="input" type="date" placeholder="" required="" id="data_receita" name="data_receita" value="{{ receita[3] }}">
+                    <span>Data: DD/MM/YYYY</span>
+                </label>
+                <label for="descricao">
+                    <input class="input" type="text" placeholder="" required="" id="descricao" name="descricao" value="{{ receita[4] }}">
+                    <span>Descrição</span>
+                </label>
+                <button class="submit">Salvar Receita</button>
+            </form>
+        </section>
+        <section class="secao-mensagem">
             <span class="mensagem-acerto-erro">
                 {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
@@ -98,17 +101,13 @@
             </span>
             </br>
         </section>
-
     <!-- Java script -->
     <script>
-         function clicar() {
-            var escrito = document.querySelector('#escrito')
-            escrito.textContent = "Seu cadastro  foi feito com sucesso!"
-        }
-
-        var botao = document.querySelector('#click')
-        botao.addEventListener('click', clicar)
+        window.onload = function() {
+        document.getElementById("main-sec").style.opacity = 1;
+        };
     </script>
+    </main>
     <!-- Fim estrutura site -->
 
 
