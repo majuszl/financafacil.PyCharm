@@ -1,12 +1,13 @@
 from flask import Flask, render_template, redirect, url_for, flash, request, session
 import fdb
 from datetime import datetime
+import re
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'grupo2'
 
 host = 'localhost'
-database = r'C:\Users\Aluno\Downloads\BancoFinacaFacil\BANCODADOS.FDB'
+database = r'C:\Users\Aluno\Downloads\siteFinanceiroBanco\BANCODADOS.FDB'
 user = 'SYSDBA'
 password = 'sysdba'
 
@@ -67,19 +68,47 @@ def abrir_cad_receita():
         return redirect(url_for('login'))
     return render_template('cadastroReceita.html')
 
-@app.route('/excluirDespesa')
-def excluirDespesa():
+@app.route('/excluirDespesa/<int:id>')
+def excluirDespesa(id):
     if 'id_usuario' not in session:
         flash('Você precisa estar logado para acessar a página')
         return redirect(url_for('login'))
-    return render_template('excluirDespesa.html')
 
-@app.route('/excluirReceita')
-def excluirReceita():
+    # Recuperar a receita do banco de dados
+    cursor = con.cursor()
+    cursor.execute('SELECT * FROM despesa WHERE id_despesa = ?', (id,))
+    despesa = cursor.fetchone()
+    cursor.close()
+
+    # Se a receita não for encontrada, exibe um erro
+    if despesa is None:
+        flash('Erro ao encontrar despesa.', 'error')
+        return redirect(url_for('listaDespesa'))
+
+    # Passando a variável receita para o template
+    return render_template('excluirDespesa.html', despesa=despesa)
+
+
+@app.route('/excluirReceita/<int:id>', methods=['GET'])
+def excluirReceita(id):
     if 'id_usuario' not in session:
         flash('Você precisa estar logado para acessar a página')
         return redirect(url_for('login'))
-    return render_template('excluirReceita.html')
+
+    # Recuperar a receita do banco de dados
+    cursor = con.cursor()
+    cursor.execute('SELECT * FROM receita WHERE id_receita = ?', (id,))
+    receita = cursor.fetchone()
+    cursor.close()
+
+    # Se a receita não for encontrada, exibe um erro
+    if receita is None:
+        flash('Erro ao encontrar receita.', 'error')
+        return redirect(url_for('listaReceita'))
+
+    # Passando a variável receita para o template
+    return render_template('excluirReceita.html', receita=receita)
+
 
 @app.route('/listaDespesa')
 def listaDespesa():
@@ -328,6 +357,7 @@ def deletarDespesa(id):
         flash('Você precisa estar logado para acessar a página')
         return redirect(url_for('login'))
 
+
     cursor = con.cursor()
     try:
         cursor.execute('DELETE FROM despesa WHERE id_despesa = ?', (id,))
@@ -338,7 +368,7 @@ def deletarDespesa(id):
         flash('Erro ao excluir despesa.', 'error')
     finally:
         cursor.close()
-        return redirect(url_for('listaDespesa'))  # Corrigido aqui
+    return redirect(url_for('listaDespesa'))
 
 @app.route('/deletarReceita/<int:id>', methods=['POST'])
 def deletarReceita(id):
@@ -346,6 +376,7 @@ def deletarReceita(id):
     if 'id_usuario' not in session:
         flash('Você precisa estar logado para acessar a página')
         return redirect(url_for('login'))
+
 
     cursor = con.cursor()
     try:
@@ -357,11 +388,21 @@ def deletarReceita(id):
         flash('Erro ao excluir receita.', 'error')
     finally:
         cursor.close()
-        return redirect(url_for('listaReceita'))
+    return redirect(url_for('listaReceita'))
 
 @app.route('/cria_usuario', methods=['GET'])
 def cria_usuario():
     return render_template('cadastro.html')
+
+def validar_senha(senha):
+    # Expressão regular para validar a senha
+    padrao = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$'
+
+# Verifica se a senha atende ao padrão
+    if re.fullmatch(padrao, senha):
+        return True
+    else:
+        return False
 
 @app.route('/adiciona_usuario', methods=['POST'])
 def adiciona_usuario():
@@ -369,6 +410,10 @@ def adiciona_usuario():
     nome = data['nome']
     email = data['email']
     senha = data['senha']
+
+    if not validar_senha(senha):
+        flash('A sua senha precisa ter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula e um número.')
+        return redirect(url_for('cria_usuario'))
 
     cursor = con.cursor()
     try:
@@ -378,12 +423,12 @@ def adiciona_usuario():
             return redirect(url_for('cria_usuario'))
 
         cursor.execute("INSERT INTO Usuario (nome, email, senha) VALUES (?, ?, ?)",
-                       (nome, email, senha))
+                           (nome, email, senha))
         con.commit()
     finally:
         cursor.close()
-    flash('Usuario adicionado com sucesso!')
-    return redirect(url_for('login'))
+        flash('Usuário adicionado com sucesso!')
+        return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

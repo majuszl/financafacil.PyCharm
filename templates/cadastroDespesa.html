@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Cadastro de Despesas</title>
+    <title>Cadastro de Despesas - Finança Fácil</title>
     <link rel="stylesheet" href="../static/css/cadastroDespesa.css">
 
     <!-- FONTE: AVENIR MEDIUM -->
@@ -52,11 +52,11 @@
         </section>
 
         <section class="botao-cab">
-            <a href="{{ url_for('login') }}">
-                <button class="botao-contato">
-                    <span class="transicao"></span>
-                    <span class="gradiente"></span>
-                    <span class="label-importante">LOGIN</span>
+            <a href="{{ url_for('logout') }}">
+                <button class="botao-log">
+                    <span class="transicao-log"></span>
+                    <span class="gradiente-log"></span>
+                    <span class="label-importante-log">LOGOUT</span>
                 </button>
             </a>
         </section>
@@ -105,7 +105,7 @@
                 </div>  
                         
                 <label for="valor">
-                    <input class="input" type="number" placeholder="" required="" id="valor" name="valor">
+                    <input class="input" min="0.01" step="0.01" type="number" placeholder="" required="" id="valor" name="valor">
                     <span>Valor da despesa em R$</span>
                 </label> 
                     

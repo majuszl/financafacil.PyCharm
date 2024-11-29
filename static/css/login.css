@@ -129,7 +129,51 @@ body {
 }
 
 .mensagem-importante-sec {
-    color: grey;
+    color: white;
     font-family: "Avenir-Medium";
     text-align: center;
+}
+
+@media (max-width: 768px) {
+  .form {
+      max-width: 90%;
+  }
+  .form-sec {
+      width: 90%;
+      padding: 20px;
+  }
+
+  .form .submit {
+      font-size: 0.8rem;
+  }
+  .label{
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .formulario {
+      padding-top: 70px;
+  }
+
+  .form-sec {
+      width: 64%;
+      border-radius: 10px;
+  }
+
+  .form .submit {
+      font-size: 0.7rem;
+      padding: 0.75rem 0.5rem;
+  }
+
+  .input-span input{
+    height: 10px;
+  }
+
+  .mensagem-importante-sec {
+      font-size: 0.8rem;
+  }
+  .label{
+    font-size: 0.9rem;
+  }
 }

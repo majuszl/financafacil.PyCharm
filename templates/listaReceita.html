@@ -44,12 +44,13 @@
         </section>
 
         <section class="botao-cab">
-            <a href="{{ url_for('abrir_login') }}">
-                <button class="botao-contato">
-                    <span class="transicao"></span>
-                    <span class="gradiente"></span>
-                    <span class="label-importante">LOGIN</span>
+            <a href="{{ url_for('logout') }}">
+                <button class="botao-log">
+                    <span class="transicao-log"></span>
+                    <span class="gradiente-log"></span>
+                    <span class="label-importante-log">LOGOUT</span>
                 </button>
+            </a>
             </a>
         </section>
     </header>
@@ -81,7 +82,7 @@
                             </svg>
                             </button>
                         </a>
-                        <form action="{{ url_for('deletarReceita', id=receita[0]) }}" method="post" style="display:inline;">
+                        <form action="{{ url_for('excluirReceita', id=receita[0]) }} " method="GET"  style="display:inline;">
                             <button type="submit" class="bin-button">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

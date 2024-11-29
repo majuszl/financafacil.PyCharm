@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOME - Finança Fácil</title>
+    <title>Página Inicial - Finança Fácil</title>
     <link rel="stylesheet" href="../static/css/index.css">
     <link href="https://db.onlinewebfonts.com/c/2090551770be22b09600a40b0b4673b7?family=Avenir-Medium" rel="stylesheet">
+    <script defer src="../animar.js"></script>
 </head>
 <body>
     <!-- Início do cabeçalho -->
@@ -43,12 +44,13 @@
             </a>
         </section>
 
+
         <section class="botao-cab">
-            <a href="{{ url_for('abrir_login') }}">
-                <button class="botao-contato">
-                    <span class="transicao"></span>
-                    <span class="gradiente"></span>
-                    <span class="label-importante">LOGIN</span>
+            <a href="{{ url_for('logout') }}">
+                <button class="botao-log">
+                    <span class="transicao-log"></span>
+                    <span class="gradiente-log"></span>
+                    <span class="label-importante-log">LOGOUT</span>
                 </button>
             </a>
         </section>
@@ -57,7 +59,6 @@
     <!-- Fim do cabeçalho -->
 
     <!-- Seção de Início da Página -->
-
     <section class="secao-user">
         <div class="user-sec">
             <div class="card">

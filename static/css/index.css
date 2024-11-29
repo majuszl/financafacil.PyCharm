@@ -13,6 +13,8 @@
     --fonte-cab-e-rod: #ffffff;
     --fonte: #000000;
     --background: #f5f9f8;
+    --log: red;
+    --log-hover: #D30000;
 }
 
 /* CABEÇALHO */
@@ -962,4 +964,314 @@ th, td {
 
 .bot-sec-desp-rec {
     gap: 20px;
+}
+
+/* BOTÃO LOGOUT */
+.botao-log {
+    font-size: 17px;
+    padding: 1em 2.7em;
+    font-weight: 500;
+    background: var(--log);
+    color: white;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.6em;
+    cursor: pointer;
+    margin: 60px;
+    margin-left: 20px;
+    margin-bottom: 50px;
+    font-weight: bold;
+    font-family: "Avenir-Medium";
+  }
+
+  .gradiente-log {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 0.6em;
+    margin-top: -0.25em;
+    background-image: linear-gradient(
+        rgba(7, 4, 0, 0),
+        rgba(7, 4, 0, 0),
+        rgba(68, 47, 0, 0.3)
+    );
+  }
+
+  .label-importante-log {
+    position: relative;
+    top: -1px;
+  }
+
+  .transicao-log {
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    transition-duration: 500ms;
+    background-color: var(--log-hover);
+    border-radius: 9999px;
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .botao-log:hover .transicao-log {
+    width: 14em;
+    height: 14em;
+  }
+
+  .botao-log:active {
+    transform: scale(0.97);
+  }
+
+
+/* RESPONSIVO */
+@media (max-width: 320px) {
+    .logo {
+        width: 100px;
+    }
+    .nav {
+        font-size: 12px;
+    }
+    .texto {
+        font-size: 12px;
+        padding: 10px;
+    }
+    h1 {
+        font-size: 20px;
+    }
+    .form {
+        padding: 5px;
+    }
+    .input {
+        font-size: 14px;
+        padding: 10px;
+    }
+    footer {
+        padding: 4px;
+    }
+    button.submit {
+        padding: 5px;
+        width: 270px;
+    }
+    div.flex {
+        width: 170px;
+    }
+    .input {
+        padding: 30px;
+    }
+    .input {
+        padding: 5px;
+    }
+    .cards {
+        display: flex;
+        flex-direction: column;
+    }
+}
+    @media (max-width: 380px) {
+    .cards {
+        display: flex;
+        flex-direction: column;
+    }
+    body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden; /* Impede a rolagem horizontal */
+        box-sizing: border-box; /* Inclui padding e bordas no tamanho do elemento */
+    }
+    .container {
+        width: 100%; /* Garante que o container ocupe 100% da largura da tela */
+        max-width: 1200px; /* Pode definir um limite máximo se necessário */
+    }
+    .logo {
+        max-width: 100%; /* A logo não ultrapassa a largura do contêiner */
+        height: auto; /* Mantém a proporção */
+    }
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+    .group {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        padding: 10px;
+    }
+    nav {
+        padding: 10px 0;
+        gap: 5px;
+        font-size: 14px;
+        flex-wrap: wrap;
+        text-align: center; /* Ajusta centralização */
+    }
+    .texto {
+        font-size: 14px;
+        padding: 10px;
+    }
+    .form {
+        max-width: 95%;
+        margin: 0 auto;
+        padding: 10px;
+    }
+    .logo {
+        width: 150px; /* Reduz tamanho da logo */
+    }
+    h1 {
+        font-size: 22px;
+    }
+    button.submit {
+        padding: 5px;
+        width: 270px;
+    }
+    .input {
+        padding: 20px;
+    }
+    form label .input {
+        width: 67% !important;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .q-somos p {
+        padding-left: 60px;
+        padding-right: 190px;
+    }
+    .sec-recursos li {
+        padding-left: 60px;
+        padding-right: 190px;
+        }
+    .sec-despesas p {
+        padding-left: 60px;
+        padding-right: 190px;
+    }
+    .sec-receitas p {
+        padding-left: 60px;
+        padding-right: 190px;
+    }
+header {
+        flex-direction: column;
+        align-items: center;
+    }
+    .group {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        padding: 10px;
+    }
+    nav {
+        padding: 10px 0;
+        gap: 5px;
+        font-size: 14px;
+        flex-wrap: wrap;
+        text-align: center; /* Ajusta centralização */
+    }
+    .texto {
+        font-size: 14px;
+        padding: 10px;
+    }
+    .form {
+        max-width: 95%;
+        margin: 0 auto;
+        padding: 10px;
+    }
+    .logo {
+        width: 150px; /* Reduz tamanho da logo */
+    }
+    h1 {
+        font-size: 22px;
+    }
+    button.submit {
+        padding: 5px;
+        width: 270px;
+    }
+    .input {
+        padding: 20px;
+    }
+    form label .input {
+        width: 67% !important;
+    }
+}
+@media (max-width: 1024px) {
+     header, main, footer {
+        width: 100%;
+        padding: 0 10px; /* Adicionado para melhor ajuste */
+    }
+    nav {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    .texto {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+    .form {
+        max-width: 90%;
+        margin: 0 auto;
+        padding: 15px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    form label .input {
+        width: 67% !important;
+    }
+    .submit {
+        width: 98% !important;
+    }
+}
+
+@media (max-width: 480px) {
+    form label .input {
+        width: 67% !important;
+    }
+    .nav {
+        font-size: 12px;
+    }
+    .group {
+        width: 100%;
+        padding: 0 5px;
+    }
+    .logo {
+        width: 120px;
+    }
+    .texto {
+        font-size: 12px;
+        padding: 10px;
+    }
+    h1 {
+        font-size: 18px;
+    }
+    .form {
+        padding: 5px;
+        max-width: 100%;
+    }
+    .input {
+        font-size: 14px;
+        padding: 10px;
+    }
+    footer {
+        padding: 5px;
+    }
+    button.submit {
+        padding: 8px;
+        width: 100%; /* Botão ocupa 100% da largura */
+    }
+    div.flex {
+        width: 100%;
+        flex-direction: column; /* Ajusta inputs para colunas */
+    }
+    .secao-user {
+        display: flex;
+        flex-direction: column;
+    }
+    .cards {
+        display: flex;
+        flex-direction: column;
+    }
 }
